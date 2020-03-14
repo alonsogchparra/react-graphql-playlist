@@ -3,17 +3,18 @@ import { graphql } from 'react-apollo'
 import { getBooksQuery } from '../queries/queries';
 
 class BookList extends Component {
+
   displayBooks() {
-
-    var data = this.props.data;
-
-    if (data.loading) {
-      return (<div>Loading books...</div>);
+    var data = this.props.data
+    if(data.loading) {
+      return <li>Loading Books...</li>
     } else {
-      return data.books.map(book => <li key={book.id}>{book.name}</li>)
+      return data.books.map(book => <li key={book.id} onClick={(e) => {this.setState({ selected: book.id })} }>{book.name}</li>)
     }
-  }
+  };
+
   render () {
+
     return (
       <div>
         <ul id="book-list">
